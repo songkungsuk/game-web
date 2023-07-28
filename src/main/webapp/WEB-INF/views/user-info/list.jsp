@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container" align="center">
 		<h1>list</h1>
 		<table border="1">
 			<tr>
@@ -21,13 +22,14 @@
 			<c:forEach items="${userList}" var="one">
 			<tr>
 				<td>${one.uiNum}</td>
-				<td>${one.uiName}</td>
+				<td><a href="/user-info/view?uiNum=${one.uiNum}">${one.uiName}</a></td>
 				<td>${one.uiId}</td>
 				<td>${one.uiBirth}</td>
 				<td>${one.credat}</td>
 			</tr>
 			</c:forEach>
 		</table>
+		<button class="btn btn-primary" onclick="location.href='/user-info/insert'">유저 추가</button>
 	</div>
 </body>
 </html>

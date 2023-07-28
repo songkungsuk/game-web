@@ -54,7 +54,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 		
 		if(userId != null) {
 			if(userInfo.get("uiPwd").equals(urpw)) {
-				session.setAttribute("user", urRepo.selectUserInfoById(userId));
 				return true;
 			}
 		}

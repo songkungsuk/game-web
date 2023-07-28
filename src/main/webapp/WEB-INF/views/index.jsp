@@ -6,17 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 </head>
 <body>
-	<h1>안녕하세요</h1>
-	<c:if test="${user != null} ">
-		<a>내정보</a>
-		<a>게시판</a>
-		<button>로그인</button>
+<div class="container" align="center">
+	<h1>집에가고싶다</h1>
+	<br><br><br><br>
+	<c:if test="${user.uiId != null}">
+		<h1><a href="/board-info/myInfo">내정보</a></h1>
+		<br>
+		<h1><a href="/board-info/list">게시판</a></h1>
+		<br>
+		<button onclick="location.href='/user-info/logout'">로그아웃</button><br>
 	</c:if>
 	<c:if test="${user == null}">
-		<button>로그인</button>
+		<button onclick="location.href='/user-info/login'" class="btn btn-primary btn-lg btn-block">로그인</button>
+		<button onclick="location.href='/user-info/insert'" class="btn btn-primary btn-lg btn-block">회원만들기</button>
 	</c:if>
-
+</div>
 </body>
 </html>
