@@ -3,6 +3,8 @@ package com.game.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 public interface UserInfoService {
 	List<Map<String, String>> selectUserInfoList(Map<String, String> userInfo);
 
@@ -16,5 +18,5 @@ public interface UserInfoService {
 
 	int deleteUserInfo(String uiNum);
 	
-	boolean checkLogin(Map<String, String> userInfo);
+	boolean checkLogin(Map<String, String> userInfo , HttpSession session);
 }
