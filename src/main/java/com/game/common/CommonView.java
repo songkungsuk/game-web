@@ -16,13 +16,14 @@ public class CommonView {
 	}
 	public static void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = PREFIX + request.getRequestURI() + SUFFIX;
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 	
 	public static void forwardMsg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = "/WEB-INF/views/common/message.jsp";
-		RequestDispatcher rd = request.getRequestDispatcher(path);
-		rd.forward(request, response);
+		
+		request.getRequestDispatcher(path).forward(request, response);
+		
 	}
 }
