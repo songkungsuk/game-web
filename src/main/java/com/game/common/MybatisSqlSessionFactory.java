@@ -38,22 +38,16 @@ public class MybatisSqlSessionFactory {
 		BoardInfoMapper biMapper = session.getMapper(BoardInfoMapper.class);
 		
 		BoardInfoVO bi = new BoardInfoVO();
-		bi.setBiNum(15);
+		bi.setBiNum(26);
 		bi.setBiTitle("안녕하세요");
-		bi.setBiContent("인사입니다");
+		bi.setBiContent("인사입니다zz");
 		bi.setUiNum(14);
+//		System.out.println(biMapper.boardInfo(bi));
 		
-		List<BoardInfoVO> selectList = biMapper.selectBoardInfoList(null);
-		BoardInfoVO boardVO = biMapper.selectBoardInfo(bi);
-//		int result = biMapper.insertBoardInfo(bi);
-		int result = biMapper.updateBoardInfo(bi);
-//		int result = biMapper.deleteBoardInfo(bi);
+		int result = biMapper.deleteBoardInfo(bi);
 		System.out.println(result);
-		
-		
-//		System.out.println(boardVO);
-		
-		for(BoardInfoVO board : selectList) {
+		List<BoardInfoVO> boardInfoList = biMapper.boardInfoList(null);
+		for(BoardInfoVO board : boardInfoList) {
 			System.out.println(board);
 		}
 	}
