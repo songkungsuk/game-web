@@ -10,15 +10,15 @@ import com.game.vo.UserInfoVO;
 public interface UserInfoService {
 	List<UserInfoVO> selectUserInfoList(UserInfoVO userInfo);
 
-	Map<String, String> selectUserInfo(String uiNum);
+	UserInfoVO selectUserInfo(String uiNum);
 
 	Map<String, String> selectUserInfoById(String uiId);
 
-	int insertUserInfo(Map<String, String> userInfo);
+	int insertUserInfo(UserInfoVO user);
 
-	int updateUserInfo(Map<String, String> userInfo);
+	int updateUserInfo(UserInfoVO user);
 
-	int deleteUserInfo(String uiNum);
+	int deleteUserInfo(UserInfoVO UserInfoVO);
 	
 	boolean checkLogin(Map<String, String> userInfo , HttpSession session);
 }

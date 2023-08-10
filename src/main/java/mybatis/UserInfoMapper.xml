@@ -6,5 +6,21 @@
 	<select id="selectUserInfoList" resultType="com.game.vo.UserInfoVO">
 		SELECT * FROM user_info
 	</select>
-	
+
+	<select id="selectUserInfo" resultType="com.game.vo.UserInfoVO">
+		SELECT * FROM user_info WHERE UI_NUM = #{uiNum}
+	</select>
+
+	<insert id="insertUserInfo" parameterType="com.game.vo.UserInfoVO">
+		INSERT INTO USER_INFO(UI_NAME, UI_ID, UI_PWD, UI_DESC)
+		VALUES(#{uiName}, #{uiId}, #{uiPwd}, #{uiDesc})
+	</insert>
+
+	<update id="updateUserInfo" parameterType="com.game.vo.UserInfoVO">
+		UPDATE user_info SET UI_NAME=#{uiName}, UI_ID=#{uiId}, UI_PWD=#{uiPwd}, UI_DESC=#{uiDesc} WHERE UI_NUM = #{uiNum}
+	</update>
+
+	<delete id="deleteUserInfo" parameterType="com.game.vo.UserInfoVO">
+		DELETE FROM user_info WHERE UI_NUM = #{uiNum}
+	</delete>
 </mapper>

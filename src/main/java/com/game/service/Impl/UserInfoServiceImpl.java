@@ -30,9 +30,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public Map<String, String> selectUserInfo(String uiNum) {
+	public UserInfoVO selectUserInfo(String uiNum) {
+		SqlSessionFactory ssf = MybatisSqlSessionFactory.getSqlSessionFactory();
+		SqlSession session = ssf.openSession(true);
+		UserInfoMapper uiMapper = session.getMapper(UserInfoMapper.class);
 		
-		return urRepo.selectUserInfo(uiNum);
+		return uiMapper.selectUserInfo(uiNum);
 	}
 
 	@Override
@@ -42,21 +45,29 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public int insertUserInfo(Map<String, String> userInfo) {
-		
-		return urRepo.insertUserInfo(userInfo);
+	public int insertUserInfo(UserInfoVO user) {
+		SqlSessionFactory ssf = MybatisSqlSessionFactory.getSqlSessionFactory();
+		SqlSession session = ssf.openSession(true);
+		UserInfoMapper uiMapper = session.getMapper(UserInfoMapper.class);
+		return uiMapper.insertUserInfo(user);
 	}
 
 	@Override
-	public int updateUserInfo(Map<String, String> userInfo) {
+	public int updateUserInfo(UserInfoVO user) {
+		SqlSessionFactory ssf = MybatisSqlSessionFactory.getSqlSessionFactory();
+		SqlSession session = ssf.openSession(true);
+		UserInfoMapper uiMapper = session.getMapper(UserInfoMapper.class);
 		
-		return urRepo.updateUserInfo(userInfo);
+		return uiMapper.updateUserInfo(user);
 	}
 
 	@Override
-	public int deleteUserInfo(String uiNum) {
+	public int deleteUserInfo(UserInfoVO user) {
+		SqlSessionFactory ssf = MybatisSqlSessionFactory.getSqlSessionFactory();
+		SqlSession session = ssf.openSession(true);
+		UserInfoMapper uiMapper = session.getMapper(UserInfoMapper.class);
 		
-		return urRepo.deleteUserInfo(uiNum);
+		return uiMapper.deleteUserInfo(user);
 	}
 
 	@Override
@@ -71,5 +82,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return false;
 	}
-
+	public static void main(String[] args) {
+		UserInfoService urService = new UserInfoServiceImpl();
+		// UI_NAME='a', UI_ID='b', UI_PWD='c', UI_DESC='d' WHERE UI_NUM = 1
+		UserInfoVO vo = new UserInfoVO();
+		vo.setUiName("d");
+		vo.setUiId("cdasdsa");
+		vo.setUiPwd("b");
+		vo.setUiDesc("a");
+		vo.setUiNum(1);
+//		System.out.println(urService.selectUserInfo("1"));
+		
+//		System.out.println(urService.insertUserInfo(vo));
+//		System.out.println(urService.updateUserInfo(vo));
+		System.out.println(urService.deleteUserInfo(vo));
+		System.out.println(urService.selectUserInfoList(null));
+	}
 }
