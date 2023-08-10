@@ -10,7 +10,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.game.mapper.BoardInfoMapper;
+import com.game.mapper.DrawTableMapper;
+import com.game.mapper.UserInfoMapper;
 import com.game.vo.BoardInfoVO;
+import com.game.vo.UserInfoVO;
 
 public class MybatisSqlSessionFactory {
 
@@ -34,21 +37,8 @@ public class MybatisSqlSessionFactory {
 
 	public static void main(String[] args) {
 		SqlSessionFactory ssf = getSqlSessionFactory();
-		SqlSession session = ssf.openSession(true);
-		BoardInfoMapper biMapper = session.getMapper(BoardInfoMapper.class);
-		
-		BoardInfoVO bi = new BoardInfoVO();
-		bi.setBiNum(26);
-		bi.setBiTitle("안녕하세요");
-		bi.setBiContent("인사입니다zz");
-		bi.setUiNum(14);
-//		System.out.println(biMapper.boardInfo(bi));
-		
-		int result = biMapper.deleteBoardInfo(bi);
-		System.out.println(result);
-		List<BoardInfoVO> boardInfoList = biMapper.boardInfoList(null);
-		for(BoardInfoVO board : boardInfoList) {
-			System.out.println(board);
-		}
+		SqlSession session = ssf.openSession();
+		DrawTableMapper dtMapper = session.getMapper(DrawTableMapper.class);
+		System.out.println(dtMapper.getDrawTable(null)); 
 	}
 }

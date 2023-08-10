@@ -40,7 +40,7 @@ public class BoardInfoServlet extends HttpServlet {
 			keyValue.put("key", request.getParameter("searchType")); 
 			keyValue.put("value", request.getParameter("searchStr"));
 			
-			request.setAttribute("boardList", boardService.selectBoardInfoList(keyValue));
+			request.setAttribute("boardList", boardService.selectBoardInfoList(null));
 		}
 		else if(cmd.equals("view") || cmd.equals("update")) {
 			String biNum = request.getParameter("biNum");

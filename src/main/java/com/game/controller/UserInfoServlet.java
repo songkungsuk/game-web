@@ -1,6 +1,7 @@
 package com.game.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,12 +16,14 @@ import javax.websocket.Session;
 import com.game.common.CommonView;
 import com.game.service.UserInfoService;
 import com.game.service.Impl.UserInfoServiceImpl;
+import com.google.gson.Gson;
 
 @WebServlet("/user-info/*") // url-pattern
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserInfoService userSevice = new UserInfoServiceImpl();
-
+	private Gson gson = new Gson();
+	
 	public UserInfoServlet() {
 		System.out.println("Create UserInfoServlet Consturctor");
 	}
@@ -28,21 +31,15 @@ public class UserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String cmd = CommonView.getcmd(request);
+		String json = "";
 		if (cmd.equals("list")) {
-			request.setAttribute("userList", userSevice.selectUserInfoList(null));
+			json = gson.toJson(userSevice.selectUserInfoList(null));
 		} else if (cmd.equals("view") || cmd.equals("update")) {
-			String uiNum = request.getParameter("uiNum");
-			request.setAttribute("User", userSevice.selectUserInfo(uiNum));
-		} else if(cmd.equals("logout")) {
-			HttpSession session = request.getSession();
-			session.invalidate();
-			request.setAttribute("msg", "로그아웃완료");
-			request.setAttribute("url", "/");
-			CommonView.forwardMsg(request, response);
-			return;
+			
 		}
-
-		CommonView.forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(json);
 
 	}
 
