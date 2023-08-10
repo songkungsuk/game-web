@@ -4,10 +4,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+tr.dd{
+	cursor: pointer;
+}
+tr.dd:hover{
+	color: blue;
+	cursor: pointer;
+}
+
+</style>
 </head>
 <body>
 	<table border="1">
 		<tr>
+			<td>#</td>
 			<td>이름</td>
 			<td>나이</td>
 			<td>주소</td>
@@ -17,6 +28,9 @@
 	</table>
 
 	<script>
+		function goPage(num) {
+			location.href='/views/one?num='+num;
+		}
 		function myfunc() {
 			let xhr = new XMLHttpRequest();
 			xhr.open('GET','/list');
@@ -26,7 +40,10 @@
 						let obj = JSON.parse(xhr.responseText);
 						let html = '';
 						for(let list of obj){
-							html += '<tr>';
+							html += '<tr class="dd" onclick="goPage('+list.num+')">';
+							console.log(list);
+							console.log(list.num);
+							html += '<td>' + list.num + '</td>';
 							html += '<td>' + list.name + '</td>';
 							html += '<td>' + list.age + '</td>';
 							html += '<td>' + list.address + '</td>';
